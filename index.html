@@ -13,9 +13,6 @@
             <div class="logo">
                 <img src="images/logo.svg" alt="Hero Cafe">
             </div>
-            <button class="menu-toggle" aria-label="メニューを開く">
-                <span class="menu-icon">☰</span>
-            </button>
         </div>
     </header>
 
@@ -113,16 +110,46 @@
         </div>
     </footer>
 
-    <!-- トップに戻るボタン -->
-    <button class="scroll-to-top" aria-label="トップに戻る">
-        <span>↑</span>
-    </button>
+    <!-- 画面下部インジケーター -->
+    <div class="bottom-indicator">
+        <button class="indicator-btn indicator-left" aria-label="ダウンロード・SNSメニュー">
+            <span>📱</span>
+        </button>
+        <button class="indicator-btn indicator-center scroll-to-top-btn" aria-label="トップに戻る">
+            <span>↑</span>
+        </button>
+        <button class="indicator-btn indicator-right" aria-label="ナビゲーションメニュー">
+            <span>☰</span>
+        </button>
+    </div>
 
-    <!-- モバイルメニュー -->
-    <div class="mobile-menu">
-        <div class="mobile-menu-content">
-            <button class="menu-close" aria-label="メニューを閉じる">×</button>
-            <nav class="mobile-nav">
+    <!-- 左メニュー（ダウンロード・SNS） -->
+    <div class="left-menu">
+        <div class="left-menu-overlay"></div>
+        <div class="left-menu-content">
+            <button class="menu-close-left" aria-label="メニューを閉じる">×</button>
+            <h3>ダウンロード・SNS</h3>
+            <div class="left-menu-links">
+                <a href="#" class="download-link app-store">
+                    <img src="images/Download_on_the_App_Store_Badge_JP_RGB_blk_100317.svg" alt="App Storeでダウンロード">
+                </a>
+                <a href="#" class="download-link google-play">
+                    <img src="images/GetItOnGooglePlay_Badge_Web_color_Japanese.svg" alt="Google Playでダウンロード">
+                </a>
+                <a href="#" class="sns-link">Twitter</a>
+                <a href="#" class="sns-link">Facebook</a>
+                <a href="#" class="sns-link">Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 右メニュー（ナビゲーション） -->
+    <div class="right-menu">
+        <div class="right-menu-overlay"></div>
+        <div class="right-menu-content">
+            <button class="menu-close-right" aria-label="メニューを閉じる">×</button>
+            <h3>メニュー</h3>
+            <nav class="right-menu-nav">
                 <a href="#main-visual">トップ</a>
                 <a href="#notice">お知らせ</a>
                 <a href="#game-intro">ゲーム紹介</a>

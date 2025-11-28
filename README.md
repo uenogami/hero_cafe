@@ -40,3 +40,4 @@ hero_cafe_site/
 
 ブラウザで `index.html` を開いて確認できます。
 
+
