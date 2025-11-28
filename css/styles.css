@@ -14,7 +14,7 @@ body {
     background-image: url("../images/bg.jpg");
     background-repeat: repeat-y;
     background-attachment: fixed;
-    padding-bottom: 70px; /* インジケーターの高さ分の余白 */
+    padding-bottom: 54px; /* インジケーターの高さ分の余白（パディング0 + ボタン高さ） */
 }
 
 /* ヘッダー */
@@ -77,7 +77,7 @@ section {
 
 .placeholder-image {
     width: 100%;
-    height: 200px;
+    height: 300px;
     background-color: gold;
     display: flex;
     align-items: center;
@@ -275,10 +275,10 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 0.5);
     backdrop-filter: blur(10px);
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-    padding: 0.75rem 1rem;
+    padding: 0;
     z-index: 1500;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
