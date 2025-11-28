@@ -1,0 +1,337 @@
+/* リセットCSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+}
+
+/* ヘッダー */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    max-width: 100%;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+/* メインコンテンツ */
+main {
+    margin-top: 60px;
+}
+
+section {
+    padding: 2rem 1rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* メインビジュアル */
+.main-visual {
+    padding-top: 80px;
+    padding-bottom: 2rem;
+    background-color: #f5f5f5;
+}
+
+.main-visual-content {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.main-visual-image {
+    margin-bottom: 0;
+}
+
+.placeholder-image {
+    width: 100%;
+    height: 200px;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    border-radius: 8px;
+}
+
+/* ダウンロードボタンセクション */
+.download-section {
+    background-color: #fff;
+    padding: 2rem 1rem;
+}
+
+.download-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.download-btn {
+    display: block;
+    width: 180px;
+}
+
+.download-btn img {
+    width: 100%;
+    height: auto;
+}
+
+.download-section-bottom {
+    background-color: #f9f9f9;
+}
+
+/* お知らせセクション */
+.notice-section {
+    background-color: #f9f9f9;
+}
+
+.notice-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+/* ゲーム紹介 */
+.game-intro {
+    background-color: #f9f9f9;
+}
+
+.intro-content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.intro-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.intro-text {
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+/* キャラクター紹介 */
+.character-intro {
+    background-color: #fff;
+}
+
+.character-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.character-placeholder {
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    text-align: center;
+    color: #999;
+}
+
+/* 作れる料理紹介 */
+.food-intro {
+    background-color: #f9f9f9;
+}
+
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.food-item {
+    aspect-ratio: 1;
+}
+
+.placeholder-icon {
+    width: 100%;
+    height: 100%;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    color: #999;
+}
+
+/* ゲーム概要 */
+.game-overview {
+    background-color: #fff;
+}
+
+.overview-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+/* フッター */
+.footer {
+    background-color: #3a3a3a;
+    color: #fff;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.footer-sns {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.sns-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.footer-sns .sns-btn {
+    background-color: #555;
+}
+
+.footer-copyright {
+    font-size: 0.875rem;
+    color: #ccc;
+}
+
+/* トップに戻るボタン */
+.scroll-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 999;
+}
+
+.scroll-to-top.visible {
+    display: block;
+}
+
+/* モバイルメニュー */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    display: none;
+}
+
+.mobile-menu.active {
+    display: block;
+}
+
+.mobile-menu-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 0 0 20px 20px;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+}
+
+.menu-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #333;
+}
+
+.mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.mobile-nav a {
+    padding: 1rem;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1.1rem;
+}
+
+/* タブレット対応（767px以下） */
+@media (max-width: 767px) {
+    section {
+        padding: 1.5rem 1rem;
+    }
+
+    .food-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+    }
+}
+
+/* デスクトップ対応（768px以上）は後で対応 */
