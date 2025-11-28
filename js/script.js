@@ -75,6 +75,90 @@ if (rightMenuNavLinks.length > 0) {
     });
 }
 
+// スライド機能
+function initSlides() {
+    const slideContainers = document.querySelectorAll('.slide-container');
+    
+    slideContainers.forEach(container => {
+        const slideItems = container.querySelectorAll('.slide-item');
+        const slideDots = container.querySelectorAll('.slide-dot');
+        let currentSlide = 0;
+        
+        // スライド表示関数
+        function showSlide(container, index) {
+            const items = container.querySelectorAll('.slide-item');
+            const dots = container.querySelectorAll('.slide-dot');
+            
+            // すべてのスライドを非表示
+            items.forEach(item => item.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            // 選択されたスライドを表示
+            if (items[index]) {
+                items[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentSlide = index;
+            }
+        }
+        
+        // 次のスライドに進む
+        function nextSlide() {
+            const nextIndex = (currentSlide + 1) % slideItems.length;
+            showSlide(container, nextIndex);
+        }
+        
+        // スライドアイテムをクリック/タッチで次のスライドに
+        slideItems.forEach((item, index) => {
+            // クリックイベント
+            item.addEventListener('click', () => {
+                nextSlide();
+            });
+            
+            // タッチイベント（モバイル対応）
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            item.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            item.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        // 左にスワイプ（次のスライド）
+                        nextSlide();
+                    } else {
+                        // 右にスワイプ（前のスライド）
+                        const prevIndex = (currentSlide - 1 + slideItems.length) % slideItems.length;
+                        showSlide(container, prevIndex);
+                    }
+                } else {
+                    // スワイプが少ない場合はタップとして扱う
+                    nextSlide();
+                }
+            }
+        });
+        
+        // インジケータードットをクリックでスライド切り替え
+        slideDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(container, index);
+            });
+        });
+    });
+}
+
+// ページ読み込み時にスライドを初期化
+document.addEventListener('DOMContentLoaded', initSlides);
+
 // スムーススクロール
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

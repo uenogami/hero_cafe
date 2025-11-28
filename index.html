@@ -47,34 +47,77 @@
     </section>
 
     <!-- ゲーム紹介 -->
-    <section class="game-intro" id="game-intro">
+    <section class="intro-section" id="game-intro">
         <h2 class="section-title">ゲーム紹介</h2>
-        <div class="intro-content">
-            <div class="intro-icon">🔍</div>
-            <div class="intro-text">
-                <p>ゲームの紹介テキストがここに入ります。</p>
+        <div class="slide-container">
+            <div class="slide-wrapper">
+                <div class="slide-item active">
+                    <div class="slide-content">
+                        <img src="images/game.jpg" alt="ゲーム画面">
+                        <p>ゲームの紹介テキスト</p>
+                    </div>
+                </div>
+                <div class="slide-item">
+                    <div class="slide-content">
+                        <img src="images/game.jpg" alt="ゲーム画面2">
+                        <p>ゲームの紹介テキスト2</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-indicator">
+                <span class="slide-dot active" data-slide="0"></span>
+                <span class="slide-dot" data-slide="1"></span>
             </div>
         </div>
     </section>
 
     <!-- キャラクター紹介 -->
-    <section class="character-intro" id="character-intro">
+    <section class="intro-section" id="character-intro">
         <h2 class="section-title">キャラクター紹介</h2>
-        <div class="character-content">
-            <div class="character-placeholder">キャラクター紹介コンテンツ</div>
+        <div class="slide-container">
+            <div class="slide-wrapper">
+                <div class="slide-item active">
+                    <div class="slide-content">
+                        <img src="images/character.jpg" alt="キャラクター画像">
+                        <p>キャラクター紹介テキスト</p>
+                    </div>
+                </div>
+                <div class="slide-item">
+                    <div class="slide-content">
+                        <img src="images/character.jpg" alt="キャラクター画像2">
+                        <p>キャラクター紹介テキスト2</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-indicator">
+                <span class="slide-dot active" data-slide="0"></span>
+                <span class="slide-dot" data-slide="1"></span>
+            </div>
         </div>
     </section>
 
     <!-- 作れる料理紹介 -->
-    <section class="food-intro" id="food-intro">
+    <section class="intro-section" id="food-intro">
         <h2 class="section-title">作れる料理紹介</h2>
-        <div class="food-grid">
-            <div class="food-item"><div class="placeholder-icon">料理1</div></div>
-            <div class="food-item"><div class="placeholder-icon">料理2</div></div>
-            <div class="food-item"><div class="placeholder-icon">料理3</div></div>
-            <div class="food-item"><div class="placeholder-icon">料理4</div></div>
-            <div class="food-item"><div class="placeholder-icon">料理5</div></div>
-            <div class="food-item"><div class="placeholder-icon">料理6</div></div>
+        <div class="slide-container">
+            <div class="slide-wrapper">
+                <div class="slide-item active">
+                    <div class="slide-content">
+                        <img src="images/omurice.jpg" alt="オムライス">
+                        <p>オムライス</p>
+                    </div>
+                </div>
+                <div class="slide-item">
+                    <div class="slide-content">
+                        <img src="images/purin.jpg" alt="プリン">
+                        <p>プリン</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-indicator">
+                <span class="slide-dot active" data-slide="0"></span>
+                <span class="slide-dot" data-slide="1"></span>
+            </div>
         </div>
     </section>
 
@@ -82,7 +125,22 @@
     <section class="game-overview" id="game-overview">
         <h2 class="section-title">ゲーム概要</h2>
         <div class="overview-content">
-            <p>ゲーム概要のテキストがここに入ります。</p>
+            <dl class="overview-list">
+                <dt>タイトル</dt>
+                <dd>Hero Cafe</dd>
+                
+                <dt>ジャンル</dt>
+                <dd>カフェ経営シミュレーション</dd>
+                
+                <dt>対応プラットフォーム</dt>
+                <dd>iOS / Android</dd>
+                
+                <dt>料金</dt>
+                <dd>無料（アプリ内課金あり）</dd>
+                
+                <dt>リリース日</dt>
+                <dd>2024年</dd>
+            </dl>
         </div>
     </section>
 

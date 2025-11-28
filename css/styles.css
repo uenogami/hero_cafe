@@ -14,7 +14,6 @@ body {
     background-image: url("../images/bg.jpg");
     background-repeat: repeat-y;
     background-attachment: fixed;
-    padding-bottom: 54px; /* インジケーターの高さ分の余白（パディング0 + ボタン高さ） */
 }
 
 /* ヘッダー */
@@ -37,7 +36,7 @@ body {
 }
 
 .logo img {
-    height: 40px;
+    height: 60px;
     width: auto;
     vertical-align: bottom;
 }
@@ -88,8 +87,10 @@ section {
 
 /* ダウンロードボタンセクション */
 .download-section {
-    background-color: transparent;
-    padding: 0 2.2rem 0 2rem;
+    background-color: white;
+    padding: .5rem 2rem;
+    margin: 1rem 2rem;
+    border-radius: 8px;
 }
 
 .download-buttons {
@@ -134,63 +135,77 @@ section {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* ゲーム紹介 */
-.game-intro {
+/* 紹介セクション（統一スタイル） */
+.intro-section {
     background-color: transparent;
 }
 
-.intro-content {
-    text-align: center;
+.slide-container {
     max-width: 600px;
     margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
 }
 
-.intro-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+.slide-wrapper {
+    display: flex;
+    transition: transform 0.3s ease;
 }
 
-.intro-text {
+.slide-item {
+    min-width: 100%;
+    display: none;
+}
+
+.slide-item.active {
+    display: block;
+}
+
+.slide-content {
     padding: 1.5rem;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* キャラクター紹介 */
-.character-intro {
-    background-color: transparent;
-}
-
-.character-content {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.character-placeholder {
-    padding: 2rem;
-    background-color: rgba(255, 255, 255, 0.85);
-    border-radius: 8px;
     text-align: center;
-    color: #666;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* 作れる料理紹介 */
-.food-intro {
-    background-color: transparent;
+.slide-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.food-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    max-width: 600px;
-    margin: 0 auto;
+.slide-content p {
+    color: #2c2c2c;
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
-.food-item {
-    aspect-ratio: 1;
+.slide-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.slide-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.slide-dot.active {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.slide-dot:hover {
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .placeholder-icon {
@@ -220,12 +235,44 @@ section {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.overview-list {
+    margin: 0;
+    padding: 0;
+}
+
+.overview-list dt {
+    font-weight: bold;
+    color: #2c2c2c;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.overview-list dt:first-child {
+    margin-top: 0;
+}
+
+.overview-list dd {
+    margin: 0 0 0.5rem 0;
+    padding: 0.5rem 0;
+    color: #2c2c2c;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.overview-list dd:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
 /* フッター */
 .footer {
     background-color: rgba(30, 58, 30, 0.9);
     backdrop-filter: blur(10px);
     color: #e8f5e9;
-    padding: 2rem 1rem;
+    padding: 2rem 1rem 5rem;
     text-align: center;
     border-top: 2px solid rgba(76, 175, 80, 0.3);
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
