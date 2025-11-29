@@ -1,30 +1,65 @@
+// 定数定義
+const SWIPE_THRESHOLD = 50;
+
+// メニュー制御関数
+function initMenu(menuSelector, openBtnSelector, closeBtnSelector, overlaySelector, navLinksSelector) {
+    const menu = document.querySelector(menuSelector);
+    const openBtn = document.querySelector(openBtnSelector);
+    const closeBtn = document.querySelector(closeBtnSelector);
+    const overlay = document.querySelector(overlaySelector);
+    const navLinks = navLinksSelector ? document.querySelectorAll(navLinksSelector) : null;
+
+    const openMenu = () => {
+        if (menu) {
+            menu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    const closeMenu = () => {
+        if (menu) {
+            menu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    };
+
+    if (openBtn && menu) {
+        openBtn.addEventListener('click', openMenu);
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeMenu);
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', closeMenu);
+    }
+
+    if (navLinks && navLinks.length > 0) {
+        navLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    }
+}
+
 // 画面下部インジケーター
 // 左メニュー（ダウンロード・SNS）
-const leftMenuBtn = document.querySelector('.indicator-left');
-const leftMenu = document.querySelector('.left-menu');
-const leftMenuClose = document.querySelector('.menu-close-left');
-const leftMenuOverlay = document.querySelector('.left-menu-overlay');
+initMenu(
+    '.left-menu',
+    '.indicator-left',
+    '.menu-close-left',
+    '.left-menu-overlay',
+    null
+);
 
-if (leftMenuBtn && leftMenu) {
-    leftMenuBtn.addEventListener('click', () => {
-        leftMenu.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
-}
-
-if (leftMenuClose) {
-    leftMenuClose.addEventListener('click', () => {
-        leftMenu.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-}
-
-if (leftMenuOverlay) {
-    leftMenuOverlay.addEventListener('click', () => {
-        leftMenu.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-}
+// 右メニュー（ナビゲーション）
+initMenu(
+    '.right-menu',
+    '.indicator-right',
+    '.menu-close-right',
+    '.right-menu-overlay',
+    '.right-menu-nav a'
+);
 
 // 中央ボタン（トップに戻る）
 const scrollToTopBtn = document.querySelector('.scroll-to-top-btn');
@@ -34,43 +69,6 @@ if (scrollToTopBtn) {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
-        });
-    });
-}
-
-// 右メニュー（ナビゲーション）
-const rightMenuBtn = document.querySelector('.indicator-right');
-const rightMenu = document.querySelector('.right-menu');
-const rightMenuClose = document.querySelector('.menu-close-right');
-const rightMenuOverlay = document.querySelector('.right-menu-overlay');
-const rightMenuNavLinks = document.querySelectorAll('.right-menu-nav a');
-
-if (rightMenuBtn && rightMenu) {
-    rightMenuBtn.addEventListener('click', () => {
-        rightMenu.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
-}
-
-if (rightMenuClose) {
-    rightMenuClose.addEventListener('click', () => {
-        rightMenu.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-}
-
-if (rightMenuOverlay) {
-    rightMenuOverlay.addEventListener('click', () => {
-        rightMenu.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-}
-
-if (rightMenuNavLinks.length > 0) {
-    rightMenuNavLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            rightMenu.classList.remove('active');
-            document.body.style.overflow = '';
         });
     });
 }
@@ -128,10 +126,9 @@ function initSlides() {
             }, { passive: true });
             
             function handleSwipe() {
-                const swipeThreshold = 50;
                 const diff = touchStartX - touchEndX;
                 
-                if (Math.abs(diff) > swipeThreshold) {
+                if (Math.abs(diff) > SWIPE_THRESHOLD) {
                     if (diff > 0) {
                         // 左にスワイプ（次のスライド）
                         nextSlide();
