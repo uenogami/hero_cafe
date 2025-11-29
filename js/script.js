@@ -73,6 +73,26 @@ if (scrollToTopBtn) {
     });
 }
 
+// ヘッダーロゴの表示/非表示制御
+const logo = document.querySelector('.logo');
+const SCROLL_THRESHOLD = 100; // ロゴを非表示にするスクロール量
+
+if (logo) {
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY > SCROLL_THRESHOLD) {
+            logo.classList.add('hidden');
+        } else {
+            logo.classList.remove('hidden');
+        }
+
+        lastScrollY = currentScrollY;
+    });
+}
+
 // スライド機能
 function initSlides() {
     const slideContainers = document.querySelectorAll('.slide-container');
