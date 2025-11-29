@@ -5,7 +5,6 @@
     --color-text-secondary: #666;
     --color-text-light: #999;
     --color-bg-white: rgba(255, 255, 255, 0.9);
-    --color-bg-white-light: rgba(255, 255, 255, 0.98);
     --color-bg-overlay: rgba(0, 0, 0, 0.5);
     --color-bg-footer: rgba(30, 58, 30, 0.9);
     --color-footer-text: #e8f5e9;
@@ -16,7 +15,7 @@
     --menu-width: 280px;
     --header-height: 60px;
     --indicator-height: 0;
-    --logo-height: 80px;
+    --logo-height: 60px;
     --close-btn-height: 40px;
     
     /* スペーシング */
@@ -422,75 +421,6 @@ section {
     transform: scale(0.9);
 }
 
-/* メニュー共通スタイル */
-.menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: var(--z-index-menu);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--transition-normal) var(--transition-ease), visibility var(--transition-normal) var(--transition-ease);
-}
-
-.menu.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.menu-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--color-bg-overlay);
-}
-
-.menu-content {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: var(--menu-width);
-    background-color: var(--color-bg-white-light);
-    backdrop-filter: blur(10px);
-    padding: var(--spacing-lg);
-    overflow-y: auto;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-}
-
-.menu-close {
-    position: absolute;
-    bottom: var(--spacing-sm);
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: var(--color-text-primary);
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-}
-
-.menu-close img {
-    width: auto;
-    height: var(--close-btn-height);
-    max-width: 60px;
-    object-fit: contain;
-}
-
-.menu-content h3 {
-    margin-bottom: var(--spacing-md);
-    font-size: 1.25rem;
-    color: var(--color-text-primary);
-}
-
 /* 左メニュー（ダウンロード・SNS） */
 .left-menu {
     position: fixed;
@@ -524,8 +454,10 @@ section {
     left: calc(var(--menu-width) * -1);
     bottom: 0;
     width: var(--menu-width);
-    background-color: var(--color-bg-white-light);
-    backdrop-filter: blur(10px);
+    background-image: url("../images/bg.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: repeat-y;
     padding: var(--spacing-lg);
     overflow-y: auto;
     transition: left var(--transition-normal) var(--transition-ease);
@@ -589,6 +521,7 @@ section {
     display: block;
     padding: var(--spacing-sm);
     background-color: #f5f5f5;
+    border: #2c2c2c 1px solid;
     border-radius: var(--border-radius);
     text-decoration: none;
     color: var(--color-text-primary);
@@ -633,8 +566,10 @@ section {
     right: calc(var(--menu-width) * -1);
     bottom: 0;
     width: var(--menu-width);
-    background-color: var(--color-bg-white-light);
-    backdrop-filter: blur(10px);
+    background-image: url("../images/bg.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: repeat-y;
     padding: var(--spacing-lg);
     overflow-y: auto;
     transition: right var(--transition-normal) var(--transition-ease);
@@ -685,7 +620,6 @@ section {
 }
 
 .right-menu-nav a {
-    border-bottom: 1px solid #e0e0e0;
     transition: background-color var(--transition-fast);
     display: flex;
     justify-content: flex-end;
@@ -693,7 +627,7 @@ section {
 }
 
 .right-menu-nav a img {
-    width: 100%;
+    width: auto;
     height: 100%;
 }
 
