@@ -14,7 +14,7 @@
     --max-content-width: 600px;
     --menu-width: 280px;
     --header-height: 60px;
-    --indicator-height: 0;
+    --indicator-height: 65px;
     --logo-height: 60px;
     --close-btn-height: 40px;
     
@@ -39,6 +39,17 @@
     --border-radius: 8px;
     --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     --box-shadow-strong: 0 4px 12px rgba(0, 0, 0, 0.15);
+    
+    /* SNSボタン */
+    --sns-btn-height: 50px;
+    --sns-icon-size: 20px;
+    --sns-icon-size-menu: 28px;
+    --sns-btn-x-bg: rgba(0, 0, 0, 0.8);
+    --sns-btn-x-bg-hover: rgba(0, 0, 0, 0.9);
+    --sns-btn-youtube-bg: #FF0000;
+    --sns-btn-youtube-bg-hover: #CC0000;
+    --sns-btn-border: rgba(255, 255, 255, 0.5);
+    --sns-btn-text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
 
 /* リセットCSS */
@@ -51,14 +62,13 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "M PLUS 1p", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
     color: var(--color-text-primary);
     background-image: url("../images/bg.jpg");
     background-repeat: repeat-y;
-    background-attachment: fixed;
-    background-size: cover;
-    padding-bottom: var(--indicator-height);
+    background-attachment: scroll;
+    background-size: auto;
 }
 
 /* ヘッダー */
@@ -104,12 +114,13 @@ section {
 }
 
 .section-title {
+    font-family: "Mochiy Pop One", sans-serif;
     font-size: 1.5rem;
     margin-bottom: var(--spacing-xs);
     text-align: center;
     font-weight: bold;
-    color: var(--color-text-primary);
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    color: white;
+    text-shadow: 0px 0px 3px black;
 }
 
 .section-title img {
@@ -124,12 +135,19 @@ section {
     padding: 0;
     background-color: transparent;
     margin-bottom: 0;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: relative;
 }
 
 .main-visual-img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
+    object-fit: cover;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 98%, rgba(0, 0, 0, 0) 100%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 98%, rgba(0, 0, 0, 0) 100%);
 }
 
 /* ダウンロードボタンセクション */
@@ -139,6 +157,15 @@ section {
     margin: 1rem auto;
     border-radius: 8px;
     width: calc(100% - 20%);
+    box-shadow: var(--box-shadow);
+}
+
+.download-section img {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto .5rem;
 }
 
 .download-buttons {
@@ -148,11 +175,12 @@ section {
     align-items: center;
     max-width: 600px;
     margin: 0 auto;
+    height: 50px;
 }
 
 .download-btn {
     display: block;
-    height: 80%;
+    height: 100%;
     width: auto;
 }
 
@@ -168,19 +196,152 @@ section {
 
 /* お知らせセクション */
 .notice-section {
+    width: calc(100% - var(--spacing-md) * 2);
+    height: 100%;
+    margin: 0 var(--spacing-md) var(--spacing-md);
     background-color: transparent;
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.notice-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    z-index: 0;
+}
+
+.notice-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.notice-section > *:not(.notice-bg-img) {
+    position: relative;
+    z-index: 2;
 }
 
 .notice-content {
     max-width: var(--max-content-width);
     margin: 0 auto;
     padding: var(--spacing-md);
-    background-color: var(--color-bg-white);
+    color: var(--color-bg-white);
     border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
 }
 
-/* 紹介セクション（統一スタイル） */
+.notice-item {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+}
+
+.notice-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.notice-item h3 {
+    font-family: "Mochiy Pop One", sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-bg-white);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.notice-item p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.notice-sns {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+}
+
+.notice-sns-text {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    margin-bottom: var(--spacing-sm);
+}
+
+.notice-sns-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+/* SNSボタン基本スタイル */
+.sns-btn-x,
+.sns-btn-youtube,
+.sns-btn-instagram {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+    text-shadow: var(--sns-btn-text-shadow);
+}
+
+/* SNSボタン共通スタイル */
+.sns-btn-x svg,
+.sns-btn-youtube svg,
+.sns-btn-instagram svg {
+    width: var(--sns-icon-size);
+    height: var(--sns-icon-size);
+    flex-shrink: 0;
+}
+
+.sns-btn-x {
+    background-color: var(--sns-btn-x-bg);
+    border: 2px solid var(--sns-btn-border);
+}
+
+.sns-btn-x:hover {
+    background-color: var(--sns-btn-x-bg-hover);
+    transform: scale(1.05);
+}
+
+.sns-btn-youtube {
+    background-color: var(--sns-btn-youtube-bg);
+    border: 2px solid var(--sns-btn-border);
+}
+
+.sns-btn-youtube:hover {
+    background-color: var(--sns-btn-youtube-bg-hover);
+    transform: scale(1.05);
+}
+
+.sns-btn-instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    border: 2px solid var(--sns-btn-border);
+}
+
+.sns-btn-instagram:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+/* ============================================
+   紹介セクション（統一スタイル）
+   ============================================ */
 .intro-section {
     background-color: transparent;
 }
@@ -213,6 +374,9 @@ section {
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
 }
 
 .slide-content img {
@@ -227,6 +391,10 @@ section {
     color: var(--color-text-primary);
     font-size: 1rem;
     line-height: 1.6;
+    min-height: 3.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .slide-indicator {
@@ -317,7 +485,7 @@ section {
     background-color: var(--color-bg-footer);
     backdrop-filter: blur(10px);
     color: var(--color-footer-text);
-    padding: var(--spacing-lg) var(--spacing-sm) 5rem;
+    padding: var(--spacing-lg) var(--spacing-sm) 6rem;
     text-align: center;
     border-top: 2px solid var(--color-footer-border);
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
@@ -326,31 +494,30 @@ section {
 .footer-sns {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
 }
 
-.sns-btn {
-    padding: 0.75rem 1.5rem;
-    background-color: #4a90e2;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
+.footer-sns-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
 
-.footer-sns .sns-btn {
-    background-color: rgba(76, 175, 80, 0.3);
-    color: #e8f5e9;
-    border: 1px solid rgba(129, 199, 132, 0.5);
-    transition: all 0.3s ease;
+.footer-sns-btn svg {
+    width: var(--sns-icon-size);
+    height: var(--sns-icon-size);
+    flex-shrink: 0;
 }
 
-.footer-sns .sns-btn:hover {
-    background-color: rgba(76, 175, 80, 0.5);
-    border-color: rgba(129, 199, 132, 0.7);
-    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+.footer-sns-btn:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
 }
 
 .footer-copyright {
@@ -408,7 +575,9 @@ section {
     transform: scale(0.9);
 }
 
-/* 左メニュー（ダウンロード・SNS） */
+/* ============================================
+   左メニュー（ダウンロード・SNS）
+   ============================================ */
 .left-menu {
     position: fixed;
     top: 0;
@@ -442,8 +611,8 @@ section {
     bottom: 0;
     width: var(--menu-width);
     background-image: url("../images/bg.jpg");
-    background-size: cover;
-    background-attachment: fixed;
+    background-size: auto;
+    background-attachment: scroll;
     background-repeat: repeat-y;
     padding: var(--spacing-lg);
     overflow-y: auto;
@@ -451,15 +620,17 @@ section {
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
+    border-top-right-radius: 200px;
 }
 
 .left-menu.active .left-menu-content {
     left: 0;
 }
 
-.menu-close-left {
+/* メニュー閉じるボタン共通スタイル */
+.menu-close-left,
+.menu-close-right {
     position: absolute;
-    left: 3rem;
     bottom: var(--spacing-sm);
     background: none;
     border: none;
@@ -472,18 +643,22 @@ section {
     justify-content: center;
 }
 
-.menu-close-left img {
+.menu-close-left {
+    left: 3rem;
+}
+
+.menu-close-right {
+    right: 3rem;
+}
+
+.menu-close-left img,
+.menu-close-right img {
     width: auto;
     height: var(--close-btn-height);
     max-width: 60px;
     object-fit: contain;
 }
 
-.left-menu-content h3 {
-    margin-bottom: var(--spacing-md);
-    font-size: 1.25rem;
-    color: var(--color-text-primary);
-}
 
 .left-menu-links {
     display: flex;
@@ -491,6 +666,10 @@ section {
     gap: var(--spacing-sm);
     margin-top: auto;
     margin-bottom: var(--spacing-xl);
+    margin-right: auto;
+    margin-left: auto;
+    width: 80%;
+
 }
 
 .left-menu-links .download-link {
@@ -499,28 +678,53 @@ section {
 }
 
 .left-menu-links .download-link img {
-    width: 216px;
+    width: 100%;
     height: auto;
     vertical-align: bottom;
 }
 
-.left-menu-links .sns-link {
-    display: block;
-    padding: var(--spacing-sm);
-    background-color: #f5f5f5;
-    border: #2c2c2c 1px solid;
+/* 左メニュー用SNSボタン */
+.left-menu-links .sns-btn-x,
+.left-menu-links .sns-btn-youtube,
+.left-menu-links .sns-btn-instagram {
+    display: flex;
+    align-items: center;
+    height: var(--sns-btn-height);
+    padding: 0 .5rem;
     border-radius: var(--border-radius);
     text-decoration: none;
-    color: var(--color-text-primary);
-    text-align: center;
-    transition: background-color var(--transition-fast);
+    font-weight: bold;
+    color: white;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+    text-shadow: var(--sns-btn-text-shadow);
 }
 
-.left-menu-links .sns-link:hover {
-    background-color: #e0e0e0;
+.left-menu-links .sns-btn-x svg,
+.left-menu-links .sns-btn-youtube svg,
+.left-menu-links .sns-btn-instagram svg {
+    width: 20%;
+    height: var(--sns-icon-size-menu);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
 }
 
-/* 右メニュー（ナビゲーション） */
+.left-menu-links .sns-btn-x span,
+.left-menu-links .sns-btn-youtube span,
+.left-menu-links .sns-btn-instagram span {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+/* 左メニュー用SNSボタンの色は共通スタイルを継承 */
+
+/* ============================================
+   右メニュー（ナビゲーション）
+   ============================================ */
 .right-menu {
     position: fixed;
     top: 0;
@@ -554,8 +758,8 @@ section {
     bottom: 0;
     width: var(--menu-width);
     background-image: url("../images/bg.jpg");
-    background-size: cover;
-    background-attachment: fixed;
+    background-size: auto;
+    background-attachment: scroll;
     background-repeat: repeat-y;
     padding: var(--spacing-lg);
     overflow-y: auto;
@@ -563,40 +767,14 @@ section {
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
+    border-top-left-radius: 200px;
 }
 
 .right-menu.active .right-menu-content {
     right: 0;
 }
 
-.menu-close-right {
-    position: absolute;
-    right: 3rem;
-    bottom: var(--spacing-sm);
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: var(--color-text-primary);
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.menu-close-right img {
-    width: auto;
-    height: var(--close-btn-height);
-    max-width: 60px;
-    object-fit: contain;
-}
-
-.right-menu-content h3 {
-    margin-bottom: var(--spacing-md);
-    font-size: 1.25rem;
-    color: var(--color-text-primary);
-    text-align: right;
-}
 
 .right-menu-nav {
     display: flex;
@@ -604,6 +782,9 @@ section {
     gap: var(--spacing-sm);
     margin-top: auto;
     margin-bottom: var(--spacing-xl);
+    margin-right: auto;
+    margin-left: auto;
+    width: 80%;
 }
 
 .right-menu-nav a {
@@ -614,15 +795,17 @@ section {
 }
 
 .right-menu-nav a img {
-    width: auto;
-    height: 100%;
+    width: 100%;
+    height: auto;
 }
 
 .right-menu-nav a:hover {
     background-color: #f5f5f5;
 }
 
-/* タブレット対応（767px以下） */
+/* ============================================
+   メディアクエリ（タブレット対応：767px以下）
+   ============================================ */
 @media (max-width: 767px) {
     section {
         padding: 1.5rem 1rem;
