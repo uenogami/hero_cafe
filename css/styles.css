@@ -83,58 +83,9 @@ body {
     background-size: auto;
 }
 
-/* モバイル・タブレット（1024px以下）では通常表示 */
-@media (max-width: 1024px) {
-    #side-content,
-    #right-content {
-        display: none;
-    }
-    
-    #content-wrapper {
-        width: 100%;
-    }
-}
-
-/* 小さいデスクトップ（768px以上1024px以下） */
-@media (min-width: 768px) and (max-width: 1024px) {
-    body {
-        display: flex;
-        min-height: 100vh;
-    }
-    
-    #side-content {
-        flex: 1;
-        min-width: 0;
-    }
-    
-    #right-content {
-        display: none;
-    }
-    
-    #content-wrapper {
-        width: 600px;
-        flex-shrink: 0;
-    }
-}
-
-/* デスクトップ（1025px以上） */
-@media (min-width: 1025px) {
-    body {
-        display: flex;
-        min-height: 100vh;
-    }
-    
-    #side-content,
-    #right-content {
-        flex: 1;
-        min-width: 0;
-    }
-    
-    #content-wrapper {
-        width: 600px;
-        flex-shrink: 0;
-        margin: 0 auto;
-    }
+/* デスクトップ用サイドコンテンツ（デフォルトは非表示） */
+.desktop-side-content {
+    display: none;
 }
 
 /* ヘッダー */
@@ -840,8 +791,10 @@ section {
 }
 
 /* ============================================
-   メディアクエリ（タブレット対応：767px以下）
+   メディアクエリ
    ============================================ */
+
+/* モバイル（767px以下） */
 @media (max-width: 767px) {
     section {
         padding: 1.5rem 1rem;
@@ -850,6 +803,272 @@ section {
     .food-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 0.75rem;
+    }
+}
+
+/* モバイル・タブレット（1024px以下） */
+@media (max-width: 1024px) {
+    #side-content,
+    #right-content {
+        display: none;
+    }
+    
+    #content-wrapper {
+        width: 100%;
+    }
+}
+
+/* 小さいデスクトップ（768px以上1024px以下） */
+@media (min-width: 768px) and (max-width: 1024px) {
+    body {
+        display: flex;
+        min-height: 100vh;
+        overflow: hidden;
+    }
+    
+    #side-content {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: calc(100% - 600px);
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--spacing-lg);
+        overflow: hidden;
+        margin-top: 3rem;
+    }
+    
+    #right-content {
+        display: none;
+    }
+    
+    #content-wrapper {
+        width: 600px;
+        flex-shrink: 0;
+        margin-left: auto;
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    
+    /* 下部インジケーターを非表示 */
+    .bottom-indicator {
+        display: none;
+    }
+    
+    /* デスクトップ用サイドコンテンツ */
+    .desktop-side-content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        align-items: center;
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    /* SNSボタン */
+    .desktop-sns-links {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        width: 100%;
+    }
+    
+    .desktop-sns-links .sns-btn-x,
+    .desktop-sns-links .sns-btn-youtube,
+    .desktop-sns-links .sns-btn-instagram {
+        display: flex;
+        align-items: center;
+        height: var(--sns-btn-height);
+        padding: 0 .5rem;
+        border-radius: var(--border-radius);
+        text-decoration: none;
+        font-weight: bold;
+        color: white;
+        transition: transform var(--transition-fast), opacity var(--transition-fast);
+        text-shadow: var(--sns-btn-text-shadow);
+    }
+    
+    .desktop-sns-links .sns-btn-x svg,
+    .desktop-sns-links .sns-btn-youtube svg,
+    .desktop-sns-links .sns-btn-instagram svg {
+        width: 20%;
+        height: var(--sns-icon-size-menu);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+    }
+    
+    .desktop-sns-links .sns-btn-x span,
+    .desktop-sns-links .sns-btn-youtube span,
+    .desktop-sns-links .sns-btn-instagram span {
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+    }
+    
+    /* ナビゲーションリンク */
+    .desktop-nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        width: 100%;
+    }
+    
+    .desktop-nav-links a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform var(--transition-fast), opacity var(--transition-fast);
+    }
+    
+    .desktop-nav-links a img {
+        width: 100%;
+        height: auto;
+    }
+    
+    .desktop-nav-links a:hover {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    .footer{
+        padding: var(--spacing-lg) var(--spacing-sm);
+    }
+}
+
+/* デスクトップ（1025px以上） */
+@media (min-width: 1025px) {
+    body {
+        display: flex;
+        min-height: 100vh;
+        overflow: hidden;
+    }
+    
+    #side-content {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: calc((100% - 600px) / 2);
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--spacing-lg);
+        overflow: hidden;
+        margin-top: 3rem;
+    }
+    
+    #right-content {
+        position: fixed;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: calc((100% - 600px) / 2);
+        min-width: 0;
+        overflow: hidden;
+    }
+    
+    #content-wrapper {
+        width: 600px;
+        flex-shrink: 0;
+        margin: 0 auto;
+        height: 100vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    
+    /* 下部インジケーターを非表示 */
+    .bottom-indicator {
+        display: none;
+    }
+    
+    /* デスクトップ用サイドコンテンツ */
+    .desktop-side-content {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        align-items: center;
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    /* SNSボタン */
+    .desktop-sns-links {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        width: 100%;
+    }
+    
+    .desktop-sns-links .sns-btn-x,
+    .desktop-sns-links .sns-btn-youtube,
+    .desktop-sns-links .sns-btn-instagram {
+        display: flex;
+        align-items: center;
+        height: var(--sns-btn-height);
+        padding: 0 .5rem;
+        border-radius: var(--border-radius);
+        text-decoration: none;
+        font-weight: bold;
+        color: white;
+        transition: transform var(--transition-fast), opacity var(--transition-fast);
+        text-shadow: var(--sns-btn-text-shadow);
+    }
+    
+    .desktop-sns-links .sns-btn-x svg,
+    .desktop-sns-links .sns-btn-youtube svg,
+    .desktop-sns-links .sns-btn-instagram svg {
+        width: 20%;
+        height: var(--sns-icon-size-menu);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+    }
+    
+    .desktop-sns-links .sns-btn-x span,
+    .desktop-sns-links .sns-btn-youtube span,
+    .desktop-sns-links .sns-btn-instagram span {
+        width: 80%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem;
+    }
+    
+    /* ナビゲーションリンク */
+    .desktop-nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        width: 100%;
+    }
+    
+    .desktop-nav-links a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform var(--transition-fast), opacity var(--transition-fast);
+    }
+    
+    .desktop-nav-links a img {
+        width: 100%;
+        height: auto;
+    }
+    
+    .desktop-nav-links a:hover {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    .footer{
+        padding: var(--spacing-lg) var(--spacing-sm);
     }
 }
 
