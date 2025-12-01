@@ -123,26 +123,13 @@ section {
 .main-visual {
     padding: 0;
     background-color: transparent;
-}
-
-.main-visual-content {
-    max-width: 100%;
-    margin: 0 auto;
-}
-
-.main-visual-image {
     margin-bottom: 0;
 }
 
-.placeholder-image {
+.main-visual-img {
     width: 100%;
-    height: 300px;
-    background-color: gold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #999;
-    border-radius: 8px;
+    height: auto;
+    display: block;
 }
 
 /* ダウンロードボタンセクション */
