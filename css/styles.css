@@ -65,10 +65,76 @@ body {
     font-family: "M PLUS 1p", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
     color: var(--color-text-primary);
+    background-color: #fff3df;
+}
+
+/* ============================================
+   デスクトップレイアウト用コンテナ
+   ============================================ */
+#side-content,
+#content-wrapper,
+#right-content {
+    display: block;
+}
+#content-wrapper{
     background-image: url("../images/bg.jpg");
     background-repeat: repeat-y;
     background-attachment: scroll;
     background-size: auto;
+}
+
+/* モバイル・タブレット（1024px以下）では通常表示 */
+@media (max-width: 1024px) {
+    #side-content,
+    #right-content {
+        display: none;
+    }
+    
+    #content-wrapper {
+        width: 100%;
+    }
+}
+
+/* 小さいデスクトップ（768px以上1024px以下） */
+@media (min-width: 768px) and (max-width: 1024px) {
+    body {
+        display: flex;
+        min-height: 100vh;
+    }
+    
+    #side-content {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    #right-content {
+        display: none;
+    }
+    
+    #content-wrapper {
+        width: 600px;
+        flex-shrink: 0;
+    }
+}
+
+/* デスクトップ（1025px以上） */
+@media (min-width: 1025px) {
+    body {
+        display: flex;
+        min-height: 100vh;
+    }
+    
+    #side-content,
+    #right-content {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    #content-wrapper {
+        width: 600px;
+        flex-shrink: 0;
+        margin: 0 auto;
+    }
 }
 
 /* ヘッダー */
@@ -105,10 +171,6 @@ body {
 }
 
 /* メインコンテンツ */
-main {
-    margin-top: 60px;
-}
-
 section {
     padding: 2rem 1rem;
 }
@@ -173,9 +235,9 @@ section {
     justify-content: space-around;
     gap: 1rem;
     align-items: center;
-    max-width: 600px;
+    max-width: 300px;
     margin: 0 auto;
-    height: 50px;
+    height: 40px;
 }
 
 .download-btn {
@@ -185,7 +247,7 @@ section {
 }
 
 .download-btn img {
-    width: 100%;
+    width: auto;
     height: 100%;
     vertical-align: bottom;
 }
@@ -199,36 +261,11 @@ section {
     width: calc(100% - var(--spacing-md) * 2);
     height: 100%;
     margin: 0 var(--spacing-md) var(--spacing-md);
-    background-color: transparent;
     position: relative;
     border-radius: 5px;
     overflow: hidden;
-}
-
-.notice-bg-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-    z-index: 0;
-}
-
-.notice-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: 1;
-}
-
-.notice-section > *:not(.notice-bg-img) {
-    position: relative;
-    z-index: 2;
+	background-color: #818272;
+	border: solid 10px #988673;
 }
 
 .notice-content {
@@ -236,7 +273,6 @@ section {
     margin: 0 auto;
     padding: var(--spacing-md);
     color: var(--color-bg-white);
-    border-radius: var(--border-radius);
 }
 
 .notice-item {
@@ -817,4 +853,3 @@ section {
     }
 }
 
-/* デスクトップ対応（768px以上）は後で対応 */
