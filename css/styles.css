@@ -378,7 +378,7 @@ section {
     color: var(--color-text-primary);
     font-size: 1rem;
     line-height: 1.6;
-    min-height: 3.2em;
+    min-height: 5em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -917,7 +917,7 @@ section {
     .desktop-nav-links {
         display: flex;
         flex-direction: column;
-        gap: var(--spacing-sm);
+        gap: .8rem;
         width: 100%;
     }
     
@@ -1047,7 +1047,7 @@ section {
     .desktop-nav-links {
         display: flex;
         flex-direction: column;
-        gap: var(--spacing-sm);
+        gap: .8rem;
         width: 100%;
     }
     

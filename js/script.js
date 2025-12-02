@@ -125,14 +125,9 @@ function initSlides() {
             showSlide(container, nextIndex);
         }
         
-        // スライドアイテムをクリック/タッチで次のスライドに
+        // スライドアイテムのスワイプ操作のみ
         slideItems.forEach((item, index) => {
-            // クリックイベント
-            item.addEventListener('click', () => {
-                nextSlide();
-            });
-            
-            // タッチイベント（モバイル対応）
+            // タッチイベント（スワイプのみ）
             let touchStartX = 0;
             let touchEndX = 0;
             
@@ -148,6 +143,7 @@ function initSlides() {
             function handleSwipe() {
                 const diff = touchStartX - touchEndX;
                 
+                // スワイプのみを検出（タップは無視）
                 if (Math.abs(diff) > SWIPE_THRESHOLD) {
                     if (diff > 0) {
                         // 左にスワイプ（次のスライド）
@@ -157,10 +153,8 @@ function initSlides() {
                         const prevIndex = (currentSlide - 1 + slideItems.length) % slideItems.length;
                         showSlide(container, prevIndex);
                     }
-                } else {
-                    // スワイプが少ない場合はタップとして扱う
-                    nextSlide();
                 }
+                // タップは何もしない
             }
         });
         
