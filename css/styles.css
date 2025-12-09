@@ -872,9 +872,10 @@ section {
     /* SNSボタン */
     .desktop-sns-links {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: var(--spacing-sm);
         width: 100%;
+        justify-content: center;
     }
     
     .desktop-sns-links .sns-btn-x,
@@ -882,8 +883,10 @@ section {
     .desktop-sns-links .sns-btn-instagram {
         display: flex;
         align-items: center;
+        justify-content: center;
+        width: var(--sns-btn-height);
         height: var(--sns-btn-height);
-        padding: 0 .5rem;
+        padding: 0;
         border-radius: var(--border-radius);
         text-decoration: none;
         font-weight: bold;
@@ -895,7 +898,7 @@ section {
     .desktop-sns-links .sns-btn-x svg,
     .desktop-sns-links .sns-btn-youtube svg,
     .desktop-sns-links .sns-btn-instagram svg {
-        width: 20%;
+        width: var(--sns-icon-size-menu);
         height: var(--sns-icon-size-menu);
         display: flex;
         justify-content: center;
@@ -906,11 +909,7 @@ section {
     .desktop-sns-links .sns-btn-x span,
     .desktop-sns-links .sns-btn-youtube span,
     .desktop-sns-links .sns-btn-instagram span {
-        width: 80%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.2rem;
+        display: none;
     }
     
     /* ナビゲーションリンク */
@@ -1002,9 +1001,10 @@ section {
     /* SNSボタン */
     .desktop-sns-links {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: var(--spacing-sm);
         width: 100%;
+        justify-content: center;
     }
     
     .desktop-sns-links .sns-btn-x,
@@ -1012,8 +1012,10 @@ section {
     .desktop-sns-links .sns-btn-instagram {
         display: flex;
         align-items: center;
+        justify-content: center;
+        width: var(--sns-btn-height);
         height: var(--sns-btn-height);
-        padding: 0 .5rem;
+        padding: 0;
         border-radius: var(--border-radius);
         text-decoration: none;
         font-weight: bold;
@@ -1025,7 +1027,7 @@ section {
     .desktop-sns-links .sns-btn-x svg,
     .desktop-sns-links .sns-btn-youtube svg,
     .desktop-sns-links .sns-btn-instagram svg {
-        width: 20%;
+        width: var(--sns-icon-size-menu);
         height: var(--sns-icon-size-menu);
         display: flex;
         justify-content: center;
@@ -1036,11 +1038,7 @@ section {
     .desktop-sns-links .sns-btn-x span,
     .desktop-sns-links .sns-btn-youtube span,
     .desktop-sns-links .sns-btn-instagram span {
-        width: 80%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.2rem;
+        display: none;
     }
     
     /* ナビゲーションリンク */
