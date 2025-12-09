@@ -125,6 +125,24 @@ function initSlides() {
             showSlide(container, nextIndex);
         }
         
+        // 前のスライドに戻る
+        function prevSlide() {
+            const prevIndex = (currentSlide - 1 + slideItems.length) % slideItems.length;
+            showSlide(container, prevIndex);
+        }
+        
+        // スライドボタンのイベントリスナー
+        const prevBtn = container.querySelector('.slide-btn-prev');
+        const nextBtn = container.querySelector('.slide-btn-next');
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', prevSlide);
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', nextSlide);
+        }
+        
         // スライドアイテムのスワイプ操作のみ
         slideItems.forEach((item, index) => {
             // タッチイベント（スワイプのみ）
@@ -150,8 +168,7 @@ function initSlides() {
                         nextSlide();
                     } else {
                         // 右にスワイプ（前のスライド）
-                        const prevIndex = (currentSlide - 1 + slideItems.length) % slideItems.length;
-                        showSlide(container, prevIndex);
+                        prevSlide();
                     }
                 }
                 // タップは何もしない
