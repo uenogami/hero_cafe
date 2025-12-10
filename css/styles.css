@@ -20,10 +20,10 @@
     
     /* スペーシング */
     --spacing-xs: 0.5rem;
-    --spacing-sm: 1rem;
+    --spacing-sm: 0.8rem;
     --spacing-md: 1.5rem;
     --spacing-lg: 2rem;
-    --spacing-xl: 4rem;
+    --spacing-xl: 2rem;
     
     /* アニメーション */
     --transition-fast: 0.2s;
@@ -65,7 +65,16 @@ body {
     font-family: "M PLUS 1p", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
     color: var(--color-text-primary);
-    background-color: #fff3df;
+    margin: 0;
+    position: relative;
+    overflow-x: hidden;
+}
+body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(45deg, #f5e3a2 0px, #f5e3a2 40px, #e6d18d 40px, #e6d18d 80px);
+    z-index: -1;
 }
 
 /* ============================================
@@ -76,49 +85,29 @@ body {
 #right-content {
     display: block;
 }
-#content-wrapper{
-    background-image: url("../images/bg.jpg");
-    background-repeat: repeat-y;
-    background-attachment: scroll;
-    background-size: auto;
-}
 
-/* デスクトップ用サイドコンテンツ（デフォルトは非表示） */
-.desktop-side-content {
+#side-content{
     display: none;
 }
 
-/* ヘッダー */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: transparent;
-    z-index: var(--z-index-header);
+#side-content,
+#right-content { 
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(2px);
 }
 
-.header-container {
+.logo-container{
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
-    padding: .5rem 0 .5rem 1rem;
-    max-width: 100%;
+    margin-bottom: 2rem;
 }
 
-.logo {
-    transition: opacity var(--transition-normal) var(--transition-ease), visibility var(--transition-normal) var(--transition-ease);
-}
-
-.logo.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.logo img {
-    height: var(--logo-height);
-    width: auto;
+.logo-container img {
+    height: auto;
+    width: 100%;
     vertical-align: bottom;
+    padding: 0 .5rem;
 }
 
 /* メインコンテンツ */
@@ -144,6 +133,10 @@ section {
 }
 
 /* メインビジュアル */
+main{
+    border: 1px #666 solid;
+}
+
 .main-visual {
     padding: 0;
     background-color: transparent;
@@ -344,22 +337,22 @@ section {
 .slide-wrapper {
     display: flex;
     transition: transform var(--transition-normal) var(--transition-ease);
+    will-change: transform;
 }
 
 .slide-item {
     min-width: 100%;
-    display: none;
+    flex-shrink: 0;
+    width: 100%;
 }
 
-.slide-item.active {
-    display: block;
+.slide-item.cloned {
+    /* クローンスライドのスタイル（必要に応じて） */
 }
 
 .slide-content {
     padding: var(--spacing-md);
     background-color: var(--color-bg-white);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -379,7 +372,7 @@ section {
     color: var(--color-text-primary);
     font-size: 1rem;
     line-height: 1.6;
-    min-height: 4em;
+    min-height: 5em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -424,24 +417,42 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    transition: background-color var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
     color: var(--color-text-primary);
     padding: 0;
+    outline: none;
+}
+
+.slide-btn:focus-visible {
+    outline: 2px solid var(--color-text-primary);
+    outline-offset: 2px;
 }
 
 .slide-btn svg {
     width: 20px;
     height: 20px;
     flex-shrink: 0;
+    transition: transform var(--transition-fast);
+    pointer-events: none;
 }
 
 .slide-btn:hover {
     background-color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 0, 0, 0.3);
     transform: translateY(-50%) scale(1.1);
+}
+
+.slide-btn:hover svg {
+    transform: scale(1.1);
 }
 
 .slide-btn:active {
     transform: translateY(-50%) scale(0.95);
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.slide-btn:active svg {
+    transform: scale(0.9);
 }
 
 .slide-btn-prev {
@@ -641,10 +652,7 @@ section {
     left: calc(var(--menu-width) * -1);
     bottom: 0;
     width: var(--menu-width);
-    background-image: url("../images/bg.jpg");
-    background-size: auto;
-    background-attachment: scroll;
-    background-repeat: repeat-y;
+    background: repeating-linear-gradient(45deg, #f5e3a2 0px, #f5e3a2 40px, #e6d18d 40px, #e6d18d 80px);
     padding: var(--spacing-lg);
     overflow-y: auto;
     transition: left var(--transition-normal) var(--transition-ease);
@@ -788,10 +796,7 @@ section {
     right: calc(var(--menu-width) * -1);
     bottom: 0;
     width: var(--menu-width);
-    background-image: url("../images/bg.jpg");
-    background-size: auto;
-    background-attachment: scroll;
-    background-repeat: repeat-y;
+    background: repeating-linear-gradient(45deg, #f5e3a2 0px, #f5e3a2 40px, #e6d18d 40px, #e6d18d 80px);
     padding: var(--spacing-lg);
     overflow-y: auto;
     transition: right var(--transition-normal) var(--transition-ease);
@@ -868,18 +873,6 @@ section {
     }
 }
 
-/* モバイル・タブレット（1024px以下） */
-@media (max-width: 1024px) {
-    #side-content,
-    #right-content {
-        display: none;
-    }
-    
-    #content-wrapper {
-        width: 100%;
-    }
-}
-
 /* 小さいデスクトップ（768px以上1024px以下） */
 @media (min-width: 768px) and (max-width: 1024px) {
     body {
@@ -896,11 +889,12 @@ section {
         width: calc(100% - 600px);
         min-width: 0;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: space-between;
         padding: var(--spacing-lg);
         overflow: hidden;
-        margin-top: 3rem;
+        padding: 5rem .5rem 8rem;
     }
     
     #right-content {
@@ -1019,11 +1013,11 @@ section {
         width: calc((100% - 600px) / 2);
         min-width: 0;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         padding: var(--spacing-lg);
         overflow: hidden;
-        margin-top: 3rem;
     }
     
     #right-content {

@@ -73,63 +73,98 @@ if (scrollToTopBtn) {
     });
 }
 
-// ヘッダーロゴの表示/非表示制御
-const logo = document.querySelector('.logo');
-const SCROLL_THRESHOLD = 100; // ロゴを非表示にするスクロール量
-
-if (logo) {
-    let lastScrollY = window.scrollY;
-
-    window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-
-        if (currentScrollY > SCROLL_THRESHOLD) {
-            logo.classList.add('hidden');
-        } else {
-            logo.classList.remove('hidden');
-        }
-
-        lastScrollY = currentScrollY;
-    });
-}
 
 // スライド機能
 function initSlides() {
     const slideContainers = document.querySelectorAll('.slide-container');
     
     slideContainers.forEach(container => {
-        const slideItems = container.querySelectorAll('.slide-item');
+        const slideWrapper = container.querySelector('.slide-wrapper');
+        const slideItems = container.querySelectorAll('.slide-item:not(.cloned)');
         const slideDots = container.querySelectorAll('.slide-dot');
         let currentSlide = 0;
+        let isTransitioning = false;
         
-        // スライド表示関数
-        function showSlide(container, index) {
-            const items = container.querySelectorAll('.slide-item');
-            const dots = container.querySelectorAll('.slide-dot');
+        // クローンスライドを作成
+        function createClones() {
+            if (slideItems.length === 0) return;
             
-            // すべてのスライドを非表示
-            items.forEach(item => item.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
+            // 最後のスライドを最初にクローン
+            const firstClone = slideItems[slideItems.length - 1].cloneNode(true);
+            firstClone.classList.add('cloned');
+            slideWrapper.insertBefore(firstClone, slideItems[0]);
             
-            // 選択されたスライドを表示
-            if (items[index]) {
-                items[index].classList.add('active');
-                dots[index].classList.add('active');
-                currentSlide = index;
+            // 最初のスライドを最後にクローン
+            const lastClone = slideItems[0].cloneNode(true);
+            lastClone.classList.add('cloned');
+            slideWrapper.appendChild(lastClone);
+            
+            // 初期位置を設定（実際の最初のスライド）
+            moveToSlide(1, false);
+        }
+        
+        // スライドを移動
+        function moveToSlide(index, animate = true) {
+            if (isTransitioning) return;
+            
+            const allItems = slideWrapper.querySelectorAll('.slide-item');
+            const totalSlides = slideItems.length;
+            
+            if (!animate) {
+                slideWrapper.style.transition = 'none';
+            } else {
+                slideWrapper.style.transition = 'transform 0.3s ease';
+            }
+            
+            const translateX = -index * 100;
+            slideWrapper.style.transform = `translateX(${translateX}%)`;
+            
+            // ドットの更新
+            slideDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === (index - 1 + totalSlides) % totalSlides);
+            });
+            
+            currentSlide = index;
+            
+            if (animate) {
+                isTransitioning = true;
+                setTimeout(() => {
+                    isTransitioning = false;
+                    
+                    // 端に到達したら、クローンスライドから実際のスライドに移動
+                    if (index === 0) {
+                        // 最初のクローンスライドにいる場合、最後の実際のスライドに移動
+                        moveToSlide(totalSlides, false);
+                    } else if (index === totalSlides + 1) {
+                        // 最後のクローンスライドにいる場合、最初の実際のスライドに移動
+                        moveToSlide(1, false);
+                    }
+                }, 300);
             }
         }
         
         // 次のスライドに進む
         function nextSlide() {
-            const nextIndex = (currentSlide + 1) % slideItems.length;
-            showSlide(container, nextIndex);
+            if (isTransitioning) return;
+            const nextIndex = currentSlide + 1;
+            moveToSlide(nextIndex);
         }
         
         // 前のスライドに戻る
         function prevSlide() {
-            const prevIndex = (currentSlide - 1 + slideItems.length) % slideItems.length;
-            showSlide(container, prevIndex);
+            if (isTransitioning) return;
+            const prevIndex = currentSlide - 1;
+            moveToSlide(prevIndex);
         }
+        
+        // 特定のスライドに移動（ドットクリック用）
+        function goToSlide(index) {
+            if (isTransitioning) return;
+            moveToSlide(index + 1); // +1は最初のクローンスライドの分
+        }
+        
+        // クローンスライドを作成
+        createClones();
         
         // スライドボタンのイベントリスナー
         const prevBtn = container.querySelector('.slide-btn-prev');
@@ -143,9 +178,9 @@ function initSlides() {
             nextBtn.addEventListener('click', nextSlide);
         }
         
-        // スライドアイテムのスワイプ操作のみ
-        slideItems.forEach((item, index) => {
-            // タッチイベント（スワイプのみ）
+        // スライドアイテムのスワイプ操作
+        const allSlideItems = slideWrapper.querySelectorAll('.slide-item');
+        allSlideItems.forEach((item) => {
             let touchStartX = 0;
             let touchEndX = 0;
             
@@ -161,24 +196,20 @@ function initSlides() {
             function handleSwipe() {
                 const diff = touchStartX - touchEndX;
                 
-                // スワイプのみを検出（タップは無視）
                 if (Math.abs(diff) > SWIPE_THRESHOLD) {
                     if (diff > 0) {
-                        // 左にスワイプ（次のスライド）
                         nextSlide();
                     } else {
-                        // 右にスワイプ（前のスライド）
                         prevSlide();
                     }
                 }
-                // タップは何もしない
             }
         });
         
         // インジケータードットをクリックでスライド切り替え
         slideDots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
-                showSlide(container, index);
+                goToSlide(index);
             });
         });
     });
