@@ -13,7 +13,6 @@
     /* サイズ */
     --max-content-width: 600px;
     --menu-width: 280px;
-    --header-height: 60px;
     --indicator-height: 65px;
     --logo-height: 60px;
     --close-btn-height: 40px;
@@ -31,7 +30,6 @@
     --transition-ease: ease;
     
     /* z-index */
-    --z-index-header: 1000;
     --z-index-indicator: 1500;
     --z-index-menu: 2000;
     
@@ -892,9 +890,8 @@ main{
         flex-direction: column;
         align-items: center;
         justify-content: space-between;
-        padding: var(--spacing-lg);
-        overflow: hidden;
         padding: 5rem .5rem 8rem;
+        overflow: hidden;
     }
     
     #right-content {
