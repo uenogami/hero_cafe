@@ -4,7 +4,7 @@
     --color-text-primary: #2c2c2c;
     --color-text-secondary: #666;
     --color-text-light: #999;
-    --color-bg-white: rgba(255, 255, 255, 0.9);
+    --color-bg-white: rgba(255, 255, 255);
     --color-bg-overlay: rgba(0, 0, 0, 0.5);
     --color-bg-footer: rgba(30, 58, 30, 0.9);
     --color-footer-text: #e8f5e9;
@@ -70,9 +70,19 @@ body {
 body::before{
     content: "";
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
     background: repeating-linear-gradient(45deg, #f5e3a2 0px, #f5e3a2 40px, #e6d18d 40px, #e6d18d 80px);
+    background-size: auto;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
     z-index: -1;
+    pointer-events: none;
 }
 
 /* ============================================
@@ -502,7 +512,7 @@ section {
     flex: 1;
     background-color: rgba(255, 255, 255, 0.6);
     padding: var(--spacing-md);
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow-strong);
     width: 100%;
 }
 
