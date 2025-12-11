@@ -215,31 +215,47 @@ function initSlides() {
     });
 }
 
-// ページ読み込み時にスライドを初期化
-document.addEventListener('DOMContentLoaded', initSlides);
-
 // ========== 2. ストーリー紹介アイテムのアニメーション ==========
-const activityItems = document.querySelectorAll('.activity-item');
-if (activityItems.length > 0) {
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.3
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
+function initActivityAnimation() {
+    const activityItems = document.querySelectorAll('.activity-item');
+    if (activityItems.length > 0) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        activityItems.forEach(item => {
+            // 初期状態で既にビューポート内にある場合もチェック
+            const rect = item.getBoundingClientRect();
+            const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+            
+            if (isInViewport) {
+                // 少し遅延させてアニメーションを確実に実行
+                setTimeout(() => {
+                    item.classList.add('is-visible');
+                }, 100);
+            } else {
+                observer.observe(item);
             }
         });
-    }, observerOptions);
-    
-    activityItems.forEach(item => {
-        observer.observe(item);
-    });
+    }
 }
+
+// ページ読み込み時にスライドとアニメーションを初期化
+document.addEventListener('DOMContentLoaded', () => {
+    initSlides();
+    initActivityAnimation();
+});
 
 
 // スムーススクロール
