@@ -218,6 +218,30 @@ function initSlides() {
 // ページ読み込み時にスライドを初期化
 document.addEventListener('DOMContentLoaded', initSlides);
 
+// ========== 2. ストーリー紹介アイテムのアニメーション ==========
+const activityItems = document.querySelectorAll('.activity-item');
+if (activityItems.length > 0) {
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    activityItems.forEach(item => {
+        observer.observe(item);
+    });
+}
+
+
 // スムーススクロール
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
